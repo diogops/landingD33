@@ -1,6 +1,8 @@
 # Fotos e vídeos originais (não usados pelo site — mantidos só localmente)
-img/WhatsApp Image*
-img/WhatsApp Video*
+estd33/img/WhatsApp Image*
+estd33/img/WhatsApp Video*
+estd33/img/WhatsApp Unknown*
+estd33/img/*.zip
 
 # Sistema
 .DS_Store

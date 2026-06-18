@@ -48,10 +48,15 @@
      lote-agua.jpg            "Infra pronta" (água)       1200x1600
      lote-energia.jpg         "Infra pronta" (energia)    1200x1600
      ruas.jpg                 Galeria / Localização       1200x1600
+     portaria-noite.jpg       Galeria (portaria à noite)  1600x1067 (paisagem)
+     portaria-noite-2.jpg     Galeria (portaria à noite)  1600x1067
      og-cover.jpg             Prévia ao compartilhar      1200x630  (IMPORTANTE)
      favicon                  Embutido em SVG (data URI)  — nada a fazer
-     tour-condominio.mp4      Vídeo (seção Vídeo)         —
-     tour-aereo.mp4           Vídeo curto (poster/loop)   —
+     tour-lote.mp4            Vídeo principal (seção Vídeo) 1024x576 (paisagem)
+     poster-lote.jpg          Poster do vídeo principal   1024x576
+     lote-angulo-1.mp4        Clipe curto (outro ângulo)  1024x576
+     lote-angulo-2.mp4        Clipe curto (outro ângulo)  1024x576
+     poster-angulo-1/2.jpg    Posters dos clipes curtos   1024x576
   NOTA: og-cover.jpg foi copiada da foto frontal. Para a prévia ficar perfeita no
         WhatsApp, gere uma versão exatamente 1200x630 (corte central) e substitua.
 
@@ -261,6 +266,13 @@
         <button class="gitem group relative overflow-hidden rounded-2xl" data-full="img/portaria-detalhe.jpg" data-cap="Arquitetura da entrada">
           <img src="img/portaria-detalhe.jpg" alt="Detalhe da cobertura da portaria com revestimento em madeira e pedra" loading="lazy" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
         </button>
+        <button class="gitem group relative col-span-2 overflow-hidden rounded-2xl" data-full="img/portaria-noite.jpg" data-cap="Portaria iluminada à noite — segurança 24h">
+          <img src="img/portaria-noite.jpg" alt="Portaria do condomínio iluminada à noite, com fachada em pedra e madeira" loading="lazy" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+          <span class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition"></span>
+        </button>
+        <button class="gitem group relative overflow-hidden rounded-2xl" data-full="img/portaria-noite-2.jpg" data-cap="Iluminação e segurança no perímetro">
+          <img src="img/portaria-noite-2.jpg" alt="Fachada da portaria iluminada à noite, vista lateral" loading="lazy" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+        </button>
         <button class="gitem group relative overflow-hidden rounded-2xl" data-full="img/guarita.jpg" data-cap="Guarita e controle de acesso">
           <img src="img/guarita.jpg" alt="Guarita de controle de acesso com cancela" loading="lazy" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
         </button>
@@ -289,14 +301,41 @@
   <!-- ============================ VÍDEO ============================ -->
   <section class="pb-20 sm:pb-28 -mt-4">
     <div class="mx-auto max-w-5xl px-5 sm:px-8">
+      <div class="reveal max-w-2xl mb-7">
+        <p class="eyebrow uppercase text-xs text-sand font-bold mb-3">Vídeo</p>
+        <h2 class="font-serif text-3xl sm:text-5xl text-forest leading-tight">Caminhe pelo lote antes de visitar</h2>
+        <p class="text-ink/60 mt-4">Um tour real pelo terreno de 1.500 m²: a rua em bloquete na frente, o almoxarifado já construído no lote, o muro do condomínio ao fundo e o verde por todos os lados.</p>
+      </div>
+
+      <!-- Vídeo principal: tour do lote (paisagem, com poster próprio) -->
       <div class="reveal relative overflow-hidden rounded-3xl bg-forest-deep shadow-xl">
         <video class="w-full aspect-video object-cover" controls preload="none"
-               poster="img/portaria-frontal.jpg" playsinline>
-          <source src="img/tour-condominio.mp4" type="video/mp4" />
-          Seu navegador não suporta vídeo. <a href="img/tour-condominio.mp4" class="underline">Baixe o vídeo</a>.
+               poster="img/poster-lote.jpg" playsinline>
+          <source src="img/tour-lote.mp4" type="video/mp4" />
+          Seu navegador não suporta vídeo. <a href="img/tour-lote.mp4" class="underline">Baixe o vídeo</a>.
         </video>
       </div>
-      <p class="text-center text-ink/50 text-sm mt-3">Tour pelo condomínio Estância das Águas</p>
+      <p class="text-center text-ink/50 text-sm mt-3">Tour pelo Lote 33 — Quadra D, Estância das Águas</p>
+
+      <!-- Clipes curtos: outros ângulos do mesmo lote -->
+      <div class="reveal mt-6 grid sm:grid-cols-2 gap-4 sm:gap-5">
+        <div class="relative overflow-hidden rounded-2xl bg-forest-deep shadow-lg">
+          <video class="w-full aspect-video object-cover" controls preload="none"
+                 poster="img/poster-angulo-1.jpg" playsinline>
+            <source src="img/lote-angulo-1.mp4" type="video/mp4" />
+            Seu navegador não suporta vídeo. <a href="img/lote-angulo-1.mp4" class="underline">Baixe o vídeo</a>.
+          </video>
+          <span class="pointer-events-none absolute top-3 left-3 rounded-full bg-black/45 px-3 py-1 text-xs font-medium text-white backdrop-blur">Outro ângulo do terreno</span>
+        </div>
+        <div class="relative overflow-hidden rounded-2xl bg-forest-deep shadow-lg">
+          <video class="w-full aspect-video object-cover" controls preload="none"
+                 poster="img/poster-angulo-2.jpg" playsinline>
+            <source src="img/lote-angulo-2.mp4" type="video/mp4" />
+            Seu navegador não suporta vídeo. <a href="img/lote-angulo-2.mp4" class="underline">Baixe o vídeo</a>.
+          </video>
+          <span class="pointer-events-none absolute top-3 left-3 rounded-full bg-black/45 px-3 py-1 text-xs font-medium text-white backdrop-blur">Vista do lote e da rua</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -642,8 +681,8 @@
 
   <!-- ============================ CTA FINAL ============================ -->
   <section class="relative py-24 sm:py-32 overflow-hidden">
-    <img src="img/portaria-frontal.jpg" alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
-    <div class="absolute inset-0 bg-forest-deep/85"></div>
+    <img src="img/portaria-noite.jpg" alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+    <div class="absolute inset-0 bg-gradient-to-b from-forest-deep/75 via-forest-deep/65 to-forest-deep/85"></div>
     <div class="relative z-10 mx-auto max-w-2xl px-6 text-center text-white">
       <p class="eyebrow uppercase text-xs text-sand-soft font-bold mb-4">Fale com a corretora</p>
       <h2 class="font-serif text-3xl sm:text-5xl leading-tight mb-5">Vamos conversar sobre o seu novo lote?</h2>

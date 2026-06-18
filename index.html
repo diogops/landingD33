@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!--
+=====================================================================================
+  LANDING PAGE — VENDA DE LOTE | Condomínio Estância das Águas — Qd D, Lote 33
+  Página estática única. Tailwind via CDN, sem build, sem backend. Canal = WhatsApp.
+=====================================================================================
+
+  ┌───────────────────────────────────────────────────────────────────────────────┐
+  │ 1) O QUE PREENCHER  — procure por  [PREENCHER]  no arquivo (Ctrl+F)             │
+  └───────────────────────────────────────────────────────────────────────────────┘
+  • CONTATO (preencher 1x, no bloco <script> CONFIG lá no final):
+        - CONFIG.whatsapp  -> DDI+DDD+número, só dígitos. Ex: "5562999999999"
+        - CONFIG.corretora -> nome da corretora responsável
+        - CONFIG.creci     -> número/UF do CRECI. Ex: "12345-F / GO"
+     Ao preencher CONFIG.whatsapp, TODOS os botões de WhatsApp passam a funcionar.
+
+  • JÁ PREENCHIDO: Estância das Águas · Av. Rio Negro, Qd D, Lt 33 ·
+        Hidrolândia-GO · 1.500 m² · R$ 270.000 (aceito proposta) ·
+        50% entrada + 6x cheque/duplicata · ~30 km / 30 min de Goiânia · poço
+        semi-artesiano · energia · bloquete · almoxarifado · futuro lago ·
+        WhatsApp 62 98336-2400 (Keyla) · domínio hidrolandiaimoveis.com.br.
+
+  • ÚNICO ITEM PENDENTE: número do CRECI da Keyla.
+        Abra o bloco CONFIG (no <script> ao final) e preencha  creci: "..."
+        Enquanto estiver vazio, a página mostra apenas "corretora credenciada"
+        (nada quebrado). Ex de preenchimento:  creci: "12345-F / GO"
+
+  • MAPA: já FUNCIONAL (busca pelo endereço). Para pin exato no lote, troque o
+        <iframe> da seção Localização (instruções no comentário lá).
+
+  ┌───────────────────────────────────────────────────────────────────────────────┐
+  │ 2) IMAGENS NECESSÁRIAS  (pasta /img/)  — já incluídas a partir das suas fotos   │
+  └───────────────────────────────────────────────────────────────────────────────┘
+     ARQUIVO                  USO                         DIMENSÃO RECOMENDADA
+     portaria-principal.jpg   Fundo do Hero               1600x1067 (paisagem)
+     portaria-frontal.jpg     Galeria / Sobre             1600x1067
+     condominio-logo.jpg      Seção "Sobre o condomínio"  1200x1600 (retrato)
+     portaria-detalhe.jpg     Galeria                     1600x1067
+     guarita.jpg              Galeria / Segurança         1600x1067
+     guarita-vista.jpg        Galeria                     1200x1600
+     lazer-praca.jpg          Galeria / Lazer             1600x1067
+     lazer-playground.jpg     Galeria / Lazer             1600x1067
+     ciclovia.jpg             Galeria / Lazer             1200x1600
+     lote-1.jpg               Galeria / O lote            1200x1600
+     lote-2.jpg               Galeria / O lote            1200x1600
+     lote-3.jpg               Galeria / O lote            1200x1600
+     lote-agua.jpg            "Infra pronta" (água)       1200x1600
+     lote-energia.jpg         "Infra pronta" (energia)    1200x1600
+     ruas.jpg                 Galeria / Localização       1200x1600
+     og-cover.jpg             Prévia ao compartilhar      1200x630  (IMPORTANTE)
+     favicon                  Embutido em SVG (data URI)  — nada a fazer
+     tour-condominio.mp4      Vídeo (seção Vídeo)         —
+     tour-aereo.mp4           Vídeo curto (poster/loop)   —
+  NOTA: og-cover.jpg foi copiada da foto frontal. Para a prévia ficar perfeita no
+        WhatsApp, gere uma versão exatamente 1200x630 (corte central) e substitua.
+
+  ┌───────────────────────────────────────────────────────────────────────────────┐
+  │ 3) COMO PUBLICAR (1 linha)                                                      │
+  └───────────────────────────────────────────────────────────────────────────────┘
+     Cloudflare Pages: dash.cloudflare.com -> Workers & Pages -> Create -> Pages ->
+     "Upload assets" -> arraste a pasta inteira (index.html + /img) -> Deploy.
+     (Mesmo princípio em Netlify Drop: app.netlify.com/drop, ou `vercel` na pasta.)
+=====================================================================================
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0e3b34" />
+
+  <!-- ============================ SEO ============================ -->
+  <title>Lote 1.500 m² pronto para construir — Estância das Águas, 30 minutos de Goiânia</title>
+  <meta name="description" content="Seu refúgio a 30 minutos de Goiânia já está pronto: lote de 1.500 m² no condomínio fechado Estância das Águas, com água, energia, ruas em bloquete e futuro lago ao lado. Trato direto com o proprietário, negociação facilitada em até 6×. Fale agora no WhatsApp." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://hidrolandiaimoveis.com.br/" />
+
+  <!-- ===================== Open Graph (WhatsApp/Facebook) ===================== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="Estância das Águas — Qd D, Lote 33" />
+  <meta property="og:title" content="Seu refúgio a 30 minutos de Goiânia, pronto para construir" />
+  <meta property="og:description" content="Lote de 1.500 m² no Estância das Águas — água, energia, bloquete e futuro lago ao lado. Condomínio fechado consolidado. Negociação direta e facilitada." />
+  <meta property="og:image" content="https://hidrolandiaimoveis.com.br/img/og-cover.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://hidrolandiaimoveis.com.br/" />
+
+  <!-- ===================== Twitter Card ===================== -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Lote 1.500 m² à venda — Estância das Águas, Hidrolândia-GO" />
+  <meta name="twitter:description" content="Condomínio de chácaras a 30 minutos de Goiânia, pronto para construir. Trato direto com o proprietário." />
+  <meta name="twitter:image" content="https://hidrolandiaimoveis.com.br/img/og-cover.jpg" />
+
+  <!-- ===================== Favicon (gota d'água, embutido) ===================== -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e3b34'/%3E%3Cpath d='M16 6c4 5 6.5 8 6.5 11.5a6.5 6.5 0 0 1-13 0C9.5 14 12 11 16 6z' fill='%23c9a86a'/%3E%3C/svg%3E" />
+
+  <!-- ===================== Fontes ===================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- ===================== Tailwind (CDN) ===================== -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest:  { DEFAULT: '#0e3b34', deep: '#0a2c27', light: '#15524a' },
+            sand:    { DEFAULT: '#c9a86a', soft: '#e3d2ac' },
+            cream:   '#f7f4ee',
+            ink:     '#161a18',
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans:  ['Manrope', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { -webkit-font-smoothing: antialiased; }
+    /* Tracking elegante para títulos em série */
+    .eyebrow { letter-spacing: .22em; }
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+    /* Lightbox */
+    #lightbox:not(.open) { display: none; }
+    /* Esconde scrollbar horizontal do strip mobile mantendo o swipe */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+
+<body class="font-sans text-ink bg-cream antialiased">
+
+  <!-- ============================ NAV ============================ -->
+  <header id="nav" class="fixed top-0 inset-x-0 z-40 transition-all duration-300">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8 h-16 flex items-center justify-between">
+      <a href="#topo" class="flex items-center gap-2.5 group" aria-label="Início">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-sand/95">
+          <svg viewBox="0 0 32 32" class="h-5 w-5" aria-hidden="true"><path d="M16 5c4.5 5.6 7 9 7 12.7a7 7 0 0 1-14 0C9 14 11.5 10.6 16 5z" fill="#0e3b34"/></svg>
+        </span>
+        <span class="leading-tight">
+          <span id="nav-title" class="block font-serif text-lg text-white transition-colors">Estância das Águas</span>
+          <span id="nav-sub" class="block text-[11px] eyebrow uppercase text-white/70 transition-colors">Quadra D, Lote 33 · Hidrolândia-GO</span>
+        </span>
+      </a>
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium">
+        <a href="#galeria"     class="nav-link text-white/85 hover:text-white transition">Galeria</a>
+        <a href="#lote"        class="nav-link text-white/85 hover:text-white transition">O lote</a>
+        <a href="#condominio"  class="nav-link text-white/85 hover:text-white transition">Condomínio</a>
+        <a href="#localizacao" class="nav-link text-white/85 hover:text-white transition">Localização</a>
+      </nav>
+      <a href="#" class="wa hidden sm:inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-black/10 hover:brightness-105 active:scale-[.98] transition">
+        <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zM6.597 20.13c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.607zM17.5 14.67c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </header>
+
+  <!-- ============================ HERO ============================ -->
+  <section id="topo" class="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
+    <img src="img/portaria-principal.jpg" alt="Portaria do condomínio Estância das Águas, com cobertura arquitetônica em concreto escuro e revestimento em pedra travertino" class="absolute inset-0 h-full w-full object-cover" fetchpriority="high" />
+    <div class="absolute inset-0 bg-gradient-to-b from-forest-deep/80 via-forest-deep/45 to-forest-deep/85"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+
+    <div class="relative z-10 mx-auto max-w-3xl px-6 text-center text-white pt-20 pb-28">
+      <p class="eyebrow uppercase text-xs sm:text-sm text-sand-soft font-semibold mb-5">
+        Condomínio fechado de chácaras · Estância das Águas · Hidrolândia-GO
+      </p>
+      <h1 class="font-serif font-700 text-4xl sm:text-6xl leading-[1.05] mb-6">
+        Seu refúgio a 30 minutos de Goiânia<br class="hidden sm:block" /> já está pronto para construir
+      </h1>
+      <p class="text-base sm:text-lg text-white/85 max-w-xl mx-auto mb-9">
+        Lote de 1.500 m² no Estância das Águas, com água, energia, ruas em
+        bloquete e futuro lago ao lado. Trato direto com o proprietário e
+        negociação facilitada — é só chegar e construir.
+      </p>
+
+      <!-- Destaques área + preço -->
+      <div class="flex flex-wrap items-stretch justify-center gap-3 sm:gap-4 mb-10">
+        <div class="rounded-2xl bg-white/10 backdrop-blur px-6 py-4 border border-white/15 min-w-[140px]">
+          <div class="font-serif text-3xl sm:text-4xl text-white leading-none">
+            <span>1.500</span><span class="text-sand-soft text-xl"> m²</span>
+          </div>
+          <div class="text-[11px] eyebrow uppercase text-white/60 mt-1.5">Área total</div>
+        </div>
+        <div class="rounded-2xl bg-sand text-forest-deep px-6 py-4 min-w-[160px] shadow-lg">
+          <div class="font-serif text-2xl sm:text-3xl leading-none mt-1">
+            R$&nbsp;270.000
+          </div>
+          <div class="text-[11px] eyebrow uppercase text-forest/70 mt-1.5">Valor · aceito proposta</div>
+        </div>
+      </div>
+
+      <p class="text-sm text-white/80 max-w-xl mx-auto mb-8 -mt-2">
+        💳 <strong class="text-white font-semibold">Negociação e pagamentos facilitados:</strong>
+        converse direto com o proprietário e negocie com entrada e parcelas (50% + até 6×).
+      </p>
+
+      <a href="#" class="wa inline-flex items-center gap-2.5 rounded-full bg-[#25D366] px-8 py-4 text-base font-semibold text-white shadow-xl shadow-black/20 hover:brightness-105 active:scale-[.98] transition">
+        <svg viewBox="0 0 24 24" class="h-5 w-5 fill-current" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zM6.597 20.13c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.607zM17.5 14.67c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        Quero conhecer este lote
+      </a>
+      <p class="mt-4 text-xs text-white/60">Atendimento por corretora credenciada (CRECI)</p>
+    </div>
+
+    <a href="#destaques" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/70 hover:text-white transition" aria-label="Rolar para baixo">
+      <svg class="h-7 w-7 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+    </a>
+  </section>
+
+  <!-- ====================== BARRA DE DESTAQUES ====================== -->
+  <section id="destaques" class="bg-forest text-white">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8 py-7 grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4 text-center">
+      <div>
+        <div class="font-serif text-2xl sm:text-3xl text-sand">1.500 m²</div>
+        <div class="text-[11px] eyebrow uppercase text-white/60 mt-1">Espaço para viver</div>
+      </div>
+      <div>
+        <div class="font-serif text-2xl sm:text-3xl text-sand">30 min</div>
+        <div class="text-[11px] eyebrow uppercase text-white/60 mt-1">da capital · acesso fácil</div>
+      </div>
+      <div>
+        <div class="font-serif text-2xl sm:text-3xl text-sand">Água + Energia</div>
+        <div class="text-[11px] eyebrow uppercase text-white/60 mt-1">Já instaladas no lote</div>
+      </div>
+      <div>
+        <div class="font-serif text-2xl sm:text-3xl text-sand">Pronto p/ construir</div>
+        <div class="text-[11px] eyebrow uppercase text-white/60 mt-1">Sem custo de infraestrutura</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ GALERIA ============================ -->
+  <section id="galeria" class="py-20 sm:py-28">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8">
+      <div class="reveal max-w-2xl mb-10">
+        <p class="eyebrow uppercase text-xs text-sand font-bold mb-3">Galeria</p>
+        <h2 class="font-serif text-3xl sm:text-5xl text-forest leading-tight">Conheça o condomínio e o lote</h2>
+        <p class="text-ink/60 mt-4">Toque em qualquer foto para ampliar. Imagens reais do local.</p>
+      </div>
+
+      <!-- Grid (mosaico). Cada item abre o lightbox. -->
+      <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-4 auto-rows-[140px] sm:auto-rows-[200px] gap-3 sm:gap-4">
+        <!-- data-full = imagem; data-cap = legenda -->
+        <button class="gitem group relative col-span-2 row-span-2 overflow-hidden rounded-2xl" data-full="img/portaria-frontal.jpg" data-cap="Portaria principal — Estância das Águas">
+          <img src="img/portaria-frontal.jpg" alt="Vista frontal da portaria do condomínio com paisagismo de palmeiras" loading="lazy" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+          <span class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition"></span>
+        </button>
+        <button class="gitem group relative overflow-hidden rounded-2xl" data-full="img/portaria-detalhe.jpg" data-cap="Arquitetura da entrada">
+          <img src="img/portaria-detalhe.jpg" alt="Detalhe da cobertura da portaria com revestimento em madeira e pedra" loading="lazy" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+        </button>
+        <button class="gitem group relative overflow-hidden rounded-2xl" data-full="img/lazer-praca.jpg" data-cap="Praça e áreas verdes">
+          <img src="img/lazer-praca.jpg" alt="Praça interna com gramado, palmeiras, bancos e quiosques" loading="lazy" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+        </button>
+        <button class="gitem group relative overflow-hidden rounded-2xl" data-full="img/lazer-playground.jpg" data-cap="Playground e lazer">
+          <img src="img/lazer-playground.jpg" alt="Playground colorido cercado por gramado e árvores" loading="lazy" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+        </button>
+        <button class="gitem group relative overflow-hidden rounded-2xl" data-full="img/ciclovia.jpg" data-cap="Ciclovia e vias internas">
+          <img src="img/ciclovia.jpg" alt="Ciclovia pavimentada ao lado do playground" loading="lazy" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+        </button>
+        <button class="gitem group relative col-span-2 overflow-hidden rounded-2xl" data-full="img/lote-2.jpg" data-cap="O lote à venda">
+          <img src="img/lote-2.jpg" alt="O terreno à venda, com gramado e árvore, dentro do condomínio" loading="lazy" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+        </button>
+        <button class="gitem group relative overflow-hidden rounded-2xl" data-full="img/lote-1.jpg" data-cap="Vista do lote">
+          <img src="img/lote-1.jpg" alt="Outra vista do terreno à venda" loading="lazy" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+        </button>
+        <button class="gitem group relative overflow-hidden rounded-2xl" data-full="img/guarita.jpg" data-cap="Guarita e controle de acesso">
+          <img src="img/guarita.jpg" alt="Guarita de controle de acesso com cancela" loading="lazy" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+        </button>
+        <button class="gitem group relative overflow-hidden rounded-2xl" data-full="img/ruas.jpg" data-cap="Ruas asfaltadas e amplas">
+          <img src="img/ruas.jpg" alt="Ruas asfaltadas e largas dentro do condomínio" loading="lazy" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ VÍDEO ============================ -->
+  <section class="pb-20 sm:pb-28 -mt-4">
+    <div class="mx-auto max-w-5xl px-5 sm:px-8">
+      <div class="reveal relative overflow-hidden rounded-3xl bg-forest-deep shadow-xl">
+        <video class="w-full aspect-video object-cover" controls preload="none"
+               poster="img/portaria-frontal.jpg" playsinline>
+          <source src="img/tour-condominio.mp4" type="video/mp4" />
+          Seu navegador não suporta vídeo. <a href="img/tour-condominio.mp4" class="underline">Baixe o vídeo</a>.
+        </video>
+      </div>
+      <p class="text-center text-ink/50 text-sm mt-3">Tour pelo condomínio Estância das Águas</p>
+    </div>
+  </section>
+
+  <!-- ====================== CARACTERÍSTICAS DO LOTE ====================== -->
+  <section id="lote" class="py-20 sm:py-28 bg-white">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8">
+      <div class="reveal max-w-2xl mb-12">
+        <p class="eyebrow uppercase text-xs text-sand font-bold mb-3">O lote</p>
+        <h2 class="font-serif text-3xl sm:text-5xl text-forest leading-tight">Tudo o que você precisaria instalar — já está aqui</h2>
+        <p class="text-ink/60 mt-4">A maior parte do custo (e da espera) de um terreno de chácara está na infraestrutura. Neste lote, ela já foi feita: você economiza tempo, dinheiro e dor de cabeça. Av. Rio Negro, Qd D, Lote 33 — Estância das Águas, Hidrolândia-GO.</p>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <!-- card -->
+        <div class="reveal rounded-2xl border border-forest/10 bg-cream p-6 hover:shadow-lg hover:border-sand/40 transition">
+          <div class="h-11 w-11 rounded-xl bg-forest/10 flex items-center justify-center text-forest mb-4">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M20.25 3.75v4.5m0-4.5h-4.5m4.5 0L15 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15m11.25 5.25v-4.5m0 4.5h-4.5m4.5 0L15 15"/></svg>
+          </div>
+          <div class="font-serif text-2xl text-forest">1.500 m²</div>
+          <div class="text-sm text-ink/55 mt-1">Área total do lote</div>
+        </div>
+
+        <div class="reveal rounded-2xl border border-forest/10 bg-cream p-6 hover:shadow-lg hover:border-sand/40 transition">
+          <div class="h-11 w-11 rounded-xl bg-forest/10 flex items-center justify-center text-forest mb-4">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085"/></svg>
+          </div>
+          <div class="font-serif text-2xl text-forest">Pronto para construir</div>
+          <div class="text-sm text-ink/55 mt-1">Infraestrutura completa</div>
+        </div>
+
+        <div class="reveal rounded-2xl border border-forest/10 bg-cream p-6 hover:shadow-lg hover:border-sand/40 transition">
+          <div class="h-11 w-11 rounded-xl bg-forest/10 flex items-center justify-center text-forest mb-4">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3c3.5 4.5 6 7.2 6 10.2A6 6 0 0 1 6 13.2C6 10.2 8.5 7.5 12 3z"/></svg>
+          </div>
+          <div class="font-serif text-2xl text-forest">Poço semi-artesiano</div>
+          <div class="text-sm text-ink/55 mt-1">Água própria e farta — sem conta mensal de concessionária</div>
+        </div>
+
+        <div class="reveal rounded-2xl border border-forest/10 bg-cream p-6 hover:shadow-lg hover:border-sand/40 transition">
+          <div class="h-11 w-11 rounded-xl bg-forest/10 flex items-center justify-center text-forest mb-4">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+          </div>
+          <div class="font-serif text-2xl text-forest">Energia elétrica</div>
+          <div class="text-sm text-ink/55 mt-1">Rede instalada no lote</div>
+        </div>
+
+        <div class="reveal rounded-2xl border border-forest/10 bg-cream p-6 hover:shadow-lg hover:border-sand/40 transition">
+          <div class="h-11 w-11 rounded-xl bg-forest/10 flex items-center justify-center text-forest mb-4">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5M3.75 21V9.349c0-.31.16-.599.422-.764l6-3.857a.9.9 0 0 1 .956 0l6 3.857a.9.9 0 0 1 .422.764V21M9 21v-3.75A1.5 1.5 0 0 1 10.5 15.75h0A1.5 1.5 0 0 1 12 17.25V21"/></svg>
+          </div>
+          <div class="font-serif text-2xl text-forest">Almoxarifado</div>
+          <div class="text-sm text-ink/55 mt-1">Construção de apoio já no lote</div>
+        </div>
+
+        <div class="reveal rounded-2xl border border-forest/10 bg-cream p-6 hover:shadow-lg hover:border-sand/40 transition">
+          <div class="h-11 w-11 rounded-xl bg-forest/10 flex items-center justify-center text-forest mb-4">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15c1.5 0 2.25-1 3.75-1s2.25 1 3.75 1 2.25-1 3.75-1 2.25 1 3.75 1 2.25-1 3-1M2.25 19c1.5 0 2.25-1 3.75-1s2.25 1 3.75 1 2.25-1 3.75-1 2.25 1 3.75 1 2.25-1 3-1"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5l1.2 2.5 2.8.4-2 2 .5 2.8L12 11l-2.5 1.2.5-2.8-2-2 2.8-.4z" opacity=".5"/></svg>
+          </div>
+          <div class="font-serif text-2xl text-forest">Futuro lago ao lado</div>
+          <div class="text-sm text-ink/55 mt-1">Vista valorizada e área de lazer natural a poucos passos</div>
+        </div>
+      </div>
+
+      <!-- Faixa "infra pronta" com fotos reais -->
+      <div class="mt-12 grid sm:grid-cols-2 gap-4 sm:gap-5">
+        <div class="reveal relative overflow-hidden rounded-2xl">
+          <img src="img/lote-agua.jpg" alt="Ponto de água (cavalete) instalado no lote" loading="lazy" class="h-56 w-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/85 to-transparent"></div>
+          <div class="absolute bottom-0 p-5 text-white">
+            <div class="font-serif text-xl">Poço semi-artesiano</div>
+            <p class="text-white/80 text-sm">Vazão excelente: abastece casa, piscina e o verde o ano todo.</p>
+          </div>
+        </div>
+        <div class="reveal relative overflow-hidden rounded-2xl">
+          <img src="img/lote-energia.jpg" alt="Poste com medidor de energia elétrica junto ao lote" loading="lazy" class="h-56 w-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-forest-deep/85 to-transparent"></div>
+          <div class="absolute bottom-0 p-5 text-white">
+            <div class="font-serif text-xl">Energia elétrica</div>
+            <p class="text-white/80 text-sm">Rede e poste prontos para ligação.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Condições de pagamento -->
+      <div class="reveal mt-10 rounded-2xl bg-forest text-white p-7 sm:p-9 flex flex-col sm:flex-row sm:items-center gap-6">
+        <div class="shrink-0">
+          <div class="font-serif text-3xl sm:text-4xl text-sand leading-none">R$ 270.000</div>
+          <div class="text-[11px] eyebrow uppercase text-white/60 mt-2">Valor · aceito proposta</div>
+        </div>
+        <div class="sm:border-l sm:border-white/15 sm:pl-6">
+          <h3 class="font-serif text-xl text-sand mb-1.5">Negociação e pagamentos facilitados</h3>
+          <p class="text-white/80 text-sm leading-relaxed">
+            <strong class="text-white font-semibold">Converse direto com o proprietário e faça sua proposta:</strong>
+            negocie com <strong class="text-white font-semibold">50% de entrada</strong> e o restante em
+            <strong class="text-white font-semibold">até 6×</strong> no cheque ou duplicata.
+            O lote permanece em nome do proprietário com <strong class="text-white font-semibold">contrato
+            de compra e venda</strong>, e a transferência é feita ao final do pagamento — com toda a segurança.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-8">
+        <a href="#" class="wa inline-flex items-center gap-2.5 rounded-full bg-forest px-7 py-4 text-base font-semibold text-white hover:bg-forest-light active:scale-[.98] transition">
+          Tirar dúvidas sobre o lote
+          <svg viewBox="0 0 24 24" class="h-5 w-5 fill-current" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zM6.597 20.13c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.607z"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ POR QUE ESTE LOTE É DIFERENTE ============ -->
+  <section class="py-20 sm:py-28 bg-cream">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8">
+      <div class="reveal max-w-2xl mb-12">
+        <p class="eyebrow uppercase text-xs text-sand font-bold mb-3">Diferenciais</p>
+        <h2 class="font-serif text-3xl sm:text-5xl text-forest leading-tight">Por que este lote é diferente dos demais</h2>
+        <p class="text-ink/60 mt-4">A maioria dos lotes de chácara é vendida “no mato”: sem água, sem energia, sem rua — e com anos de obra de infraestrutura pela frente. Aqui é o contrário.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div class="reveal rounded-2xl bg-white p-6 border border-forest/10">
+          <div class="font-serif text-2xl text-forest">1.500 m²</div>
+          <p class="text-ink/60 text-sm mt-1.5 leading-relaxed">Espaço de sobra para casa, piscina, pomar e área gourmet — sem ficar espremido.</p>
+        </div>
+        <div class="reveal rounded-2xl bg-white p-6 border border-forest/10">
+          <div class="font-serif text-2xl text-forest">Água já disponível</div>
+          <p class="text-ink/60 text-sm mt-1.5 leading-relaxed">Poço semi-artesiano com vazão excelente. Você não espera, não perfura, não paga concessionária.</p>
+        </div>
+        <div class="reveal rounded-2xl bg-white p-6 border border-forest/10">
+          <div class="font-serif text-2xl text-forest">Energia instalada</div>
+          <p class="text-ink/60 text-sm mt-1.5 leading-relaxed">Rede e poste prontos no lote. Ligou, começou a obra. Sem custo de extensão de rede.</p>
+        </div>
+        <div class="reveal rounded-2xl bg-white p-6 border border-forest/10">
+          <div class="font-serif text-2xl text-forest">Almoxarifado construído</div>
+          <p class="text-ink/60 text-sm mt-1.5 leading-relaxed">Já há uma construção de apoio no terreno para guardar material e abrigar a obra desde o dia 1.</p>
+        </div>
+        <div class="reveal rounded-2xl bg-white p-6 border border-forest/10">
+          <div class="font-serif text-2xl text-forest">Futuro lago ao lado</div>
+          <p class="text-ink/60 text-sm mt-1.5 leading-relaxed">Vista e lazer natural à porta — e um forte vetor de valorização para quem compra antes.</p>
+        </div>
+        <div class="reveal rounded-2xl bg-white p-6 border border-forest/10">
+          <div class="font-serif text-2xl text-forest">30 minutos de Goiânia</div>
+          <p class="text-ink/60 text-sm mt-1.5 leading-relaxed">Perto o bastante para ir num impulso de sexta; longe o bastante para sentir que viajou.</p>
+        </div>
+        <div class="reveal rounded-2xl bg-white p-6 border border-forest/10 sm:col-span-2 lg:col-span-3">
+          <div class="font-serif text-2xl text-forest">Condomínio consolidado</div>
+          <p class="text-ink/60 text-sm mt-1.5 leading-relaxed">Não é projeto no papel: portaria, ruas em bloquete, energia, áreas de lazer e vizinhança já existem e funcionam. Você compra segurança, não promessa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== SOBRE O CONDOMÍNIO ====================== -->
+  <section id="condominio" class="py-20 sm:py-28 bg-forest text-white overflow-hidden">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div class="reveal">
+        <p class="eyebrow uppercase text-xs text-sand font-bold mb-3">O condomínio</p>
+        <h2 class="font-serif text-3xl sm:text-5xl leading-tight mb-5">Um condomínio que já funciona</h2>
+        <p class="text-white/75 mb-8 leading-relaxed">
+          Estância das Águas é um condomínio fechado de chácaras a 30 minutos
+          de Goiânia, em Hidrolândia — consolidado, todo murado com concertina,
+          segurança 24h e áreas de lazer em pleno uso. Aqui você tem a
+          tranquilidade do campo com a segurança de morar entre vizinhos, e a
+          capital a um trajeto curto. Perto da cidade, longe do corre-corre.
+        </p>
+
+        <!-- Lista de infraestrutura. Remova/ajuste os itens conforme o condomínio. -->
+        <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-3.5 text-sm">
+          <li class="flex items-center gap-3"><span class="text-sand">●</span> Segurança 24h, portaria e cancela</li>
+          <li class="flex items-center gap-3"><span class="text-sand">●</span> Todo murado, com concertina no perímetro</li>
+          <li class="flex items-center gap-3"><span class="text-sand">●</span> Acessos ao condomínio asfaltados</li>
+          <li class="flex items-center gap-3"><span class="text-sand">●</span> Ruas internas em bloquete</li>
+          <li class="flex items-center gap-3"><span class="text-sand">●</span> Energia elétrica e iluminação</li>
+          <li class="flex items-center gap-3"><span class="text-sand">●</span> Água de poço semi-artesiano</li>
+          <li class="flex items-center gap-3"><span class="text-sand">●</span> Ciclovia e calçadas</li>
+          <li class="flex items-center gap-3"><span class="text-sand">●</span> Parque infantil para as crianças</li>
+          <li class="flex items-center gap-3"><span class="text-sand">●</span> Praça de convívio e áreas verdes</li>
+          <li class="flex items-center gap-3"><span class="text-sand">●</span> Futuro lago ao lado do lote</li>
+        </ul>
+      </div>
+
+      <div class="reveal grid grid-cols-2 gap-4">
+        <img src="img/condominio-logo.jpg" alt="Letreiro do condomínio Estância das Águas na entrada" loading="lazy" class="row-span-2 h-full w-full object-cover rounded-2xl" />
+        <img src="img/guarita-vista.jpg" alt="Guarita do condomínio com vista para a área externa" loading="lazy" class="h-full w-full object-cover rounded-2xl" />
+        <img src="img/lazer-playground.jpg" alt="Área de lazer com playground" loading="lazy" class="h-full w-full object-cover rounded-2xl" />
+      </div>
+    </div>
+
+    <!-- Taxa de condomínio -->
+    <div class="mx-auto max-w-6xl px-5 sm:px-8 mt-14">
+      <div class="reveal rounded-3xl bg-forest-light/30 border border-white/10 p-8 sm:p-10 grid md:grid-cols-[auto,1fr] gap-8 md:gap-10 items-center">
+        <div class="text-center md:text-left md:border-r md:border-white/15 md:pr-10">
+          <div class="font-serif text-4xl sm:text-5xl text-sand leading-none">R$ 600<span class="text-2xl text-white/60">/mês</span></div>
+          <div class="text-[11px] eyebrow uppercase text-white/60 mt-3">Taxa de condomínio</div>
+          <div class="mt-3 inline-flex items-center gap-2 rounded-full bg-sand/15 px-3 py-1.5 text-xs font-semibold text-sand-soft">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/></svg>
+            Sem rateios à vista · sem surpresas
+          </div>
+        </div>
+        <div>
+          <h3 class="font-serif text-2xl text-sand mb-2">Uma taxa enxuta, e o que ela mantém</h3>
+          <p class="text-white/75 text-sm leading-relaxed mb-5">
+            Custo previsível, sem aquelas chamadas de rateio que pegam o morador de surpresa.
+            Por R$ 600 mensais, você tem tudo o que faz a diferença no dia a dia:
+          </p>
+          <ul class="grid sm:grid-cols-3 gap-4 text-sm">
+            <li class="flex items-start gap-2.5"><span class="text-sand mt-0.5">●</span><span><strong class="text-white font-semibold">Segurança 24h</strong><br /><span class="text-white/65">vigilância o tempo todo</span></span></li>
+            <li class="flex items-start gap-2.5"><span class="text-sand mt-0.5">●</span><span><strong class="text-white font-semibold">Sempre limpo</strong><br /><span class="text-white/65">áreas comuns conservadas</span></span></li>
+            <li class="flex items-start gap-2.5"><span class="text-sand mt-0.5">●</span><span><strong class="text-white font-semibold">Comunidade unida</strong><br /><span class="text-white/65">vizinhos em prol de melhorias</span></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ IMAGINE SEUS FINAIS DE SEMANA AQUI ============ -->
+  <section class="relative py-24 sm:py-32 overflow-hidden">
+    <img src="img/lazer-praca.jpg" alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+    <div class="absolute inset-0 bg-forest-deep/82"></div>
+    <div class="relative z-10 mx-auto max-w-3xl px-6 text-center text-white">
+      <p class="eyebrow uppercase text-xs text-sand-soft font-bold mb-4">A vida que cabe aqui</p>
+      <h2 class="font-serif text-3xl sm:text-5xl leading-tight mb-7">Imagine seus finais de semana aqui</h2>
+      <div class="reveal space-y-5 text-white/85 text-base sm:text-lg leading-relaxed text-left sm:text-center max-w-2xl mx-auto">
+        <p>Sexta à tarde. O carro entra pela portaria, a cancela sobe e a cidade fica para trás. Em 30 minutos, o barulho some.</p>
+        <p>No sábado, a fumaça do churrasco se mistura ao cheiro de grama. As crianças correm soltas, de bicicleta pela ciclovia, sem você precisar olhar a cada segundo — porque o condomínio é fechado e o portão é vigiado.</p>
+        <p>No fim da tarde, o silêncio. O céu abre. E, do seu lote, dá pra ver o lago que está chegando ali do lado.</p>
+        <p class="text-sand-soft font-medium">No domingo à noite você volta para Goiânia descansado. E já contando os dias para a próxima sexta.</p>
+      </div>
+      <a href="#" class="wa mt-10 inline-flex items-center gap-2.5 rounded-full bg-[#25D366] px-8 py-4 text-base font-semibold text-white shadow-xl shadow-black/20 hover:brightness-105 active:scale-[.98] transition">
+        <svg viewBox="0 0 24 24" class="h-5 w-5 fill-current" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zM6.597 20.13c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.607z"/></svg>
+        Quero passar meus fins de semana aqui
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================ LOCALIZAÇÃO ============================ -->
+  <section id="localizacao" class="py-20 sm:py-28 bg-white">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8">
+      <div class="reveal max-w-2xl mb-10">
+        <p class="eyebrow uppercase text-xs text-sand font-bold mb-3">Localização</p>
+        <h2 class="font-serif text-3xl sm:text-5xl text-forest leading-tight">Perto de tudo, longe da correria</h2>
+        <p class="text-ink/60 mt-4">A 30 minutos de Goiânia, com acesso fácil. Perto o suficiente para um fim de semana sem planejamento; tranquilo o suficiente para parecer outro mundo. Av. Rio Negro, Qd D, Lt 33 — Estância das Águas, Hidrolândia-GO.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+        <!-- MAPA -->
+        <div class="lg:col-span-2 reveal">
+          <div class="aspect-[16/10] w-full overflow-hidden rounded-2xl border border-forest/10 bg-cream">
+            <!--
+              MAPA FUNCIONAL: embed pela busca do endereço (não precisa de chave de API).
+              Para um PIN EXATO no lote: no Google Maps clique no ponto certo -> Compartilhar
+              -> "Incorporar um mapa" -> copie o <iframe ...> e substitua o iframe abaixo.
+            -->
+            <iframe
+              title="Mapa — Condomínio Estância das Águas, Hidrolândia-GO"
+              class="h-full w-full border-0"
+              src="https://www.google.com/maps?q=Condom%C3%ADnio%20Est%C3%A2ncia%20das%20%C3%81guas%2C%20Hidrol%C3%A2ndia%20-%20GO&output=embed"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <!-- PROXIMIDADES -->
+        <div class="reveal rounded-2xl bg-cream border border-forest/10 p-7">
+          <h3 class="font-serif text-2xl text-forest mb-5">Proximidades</h3>
+          <ul class="space-y-4 text-sm text-ink/75">
+            <li class="flex items-start gap-3"><span class="mt-0.5 h-6 w-6 shrink-0 rounded-full bg-sand/30 text-forest flex items-center justify-center text-xs font-bold">→</span> 30 minutos de Goiânia — chega antes mesmo de relaxar do trânsito da cidade</li>
+            <li class="flex items-start gap-3"><span class="mt-0.5 h-6 w-6 shrink-0 rounded-full bg-sand/30 text-forest flex items-center justify-center text-xs font-bold">→</span> Acesso fácil pela região de Hidrolândia, com boa estrada</li>
+            <li class="flex items-start gap-3"><span class="mt-0.5 h-6 w-6 shrink-0 rounded-full bg-sand/30 text-forest flex items-center justify-center text-xs font-bold">→</span> Comércio, mercado e serviços de Hidrolândia a poucos minutos</li>
+            <li class="flex items-start gap-3"><span class="mt-0.5 h-6 w-6 shrink-0 rounded-full bg-sand/30 text-forest flex items-center justify-center text-xs font-bold">→</span> Vizinhança tranquila e consolidada — ideal para morar ou descansar</li>
+          </ul>
+          <a href="#" class="wa mt-6 inline-flex items-center gap-2 text-sm font-semibold text-forest hover:text-forest-light transition">
+            Pedir a localização exata →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== POR QUE COMPRAR DIRETO ====================== -->
+  <section class="py-20 sm:py-28 bg-cream">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8">
+      <div class="reveal max-w-2xl mb-12">
+        <p class="eyebrow uppercase text-xs text-sand font-bold mb-3">Confiança</p>
+        <h2 class="font-serif text-3xl sm:text-5xl text-forest leading-tight">Negociação direta, segura e sem surpresas</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5">
+        <div class="reveal rounded-2xl bg-white p-7 border border-forest/10">
+          <div class="h-12 w-12 rounded-xl bg-forest text-sand flex items-center justify-center mb-5">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33"/></svg>
+          </div>
+          <h3 class="font-serif text-xl text-forest mb-2">Direto com o proprietário</h3>
+          <p class="text-ink/60 text-sm leading-relaxed">Sem imobiliária no meio, sem cadeia de comissões inflando o valor. Você conversa com quem decide — e tem espaço real para negociar preço e condições.</p>
+        </div>
+        <div class="reveal rounded-2xl bg-white p-7 border border-forest/10">
+          <div class="h-12 w-12 rounded-xl bg-forest text-sand flex items-center justify-center mb-5">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/></svg>
+          </div>
+          <h3 class="font-serif text-xl text-forest mb-2">Documentação regular</h3>
+          <p class="text-ink/60 text-sm leading-relaxed">Matrícula e documentação em ordem. Contrato de compra e venda e transferência ao fim do pagamento, com tudo registrado.</p>
+        </div>
+        <div class="reveal rounded-2xl bg-white p-7 border border-forest/10">
+          <div class="h-12 w-12 rounded-xl bg-forest text-sand flex items-center justify-center mb-5">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0zM4.5 20.25a7.5 7.5 0 0 1 15 0v.75H4.5v-.75z"/></svg>
+          </div>
+          <h3 class="font-serif text-xl text-forest mb-2">Suporte de corretora CRECI</h3>
+          <p class="text-ink/60 text-sm leading-relaxed">Direto não quer dizer desamparado: uma corretora credenciada conduz cada etapa para garantir segurança jurídica.</p>
+        </div>
+      </div>
+
+      <!-- Palavra do proprietário -->
+      <div class="reveal mt-10 rounded-3xl bg-forest text-white p-8 sm:p-10 grid md:grid-cols-[auto,1fr] gap-7 md:gap-9 items-start">
+        <div class="flex md:flex-col items-center md:items-start gap-4">
+          <div class="h-16 w-16 shrink-0 rounded-2xl bg-sand text-forest flex items-center justify-center">
+            <svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085"/></svg>
+          </div>
+          <div>
+            <p class="font-serif text-xl text-sand leading-tight">O proprietário é construtor</p>
+            <p class="text-white/60 text-sm mt-1">e mora no condomínio</p>
+          </div>
+        </div>
+        <div>
+          <p class="eyebrow uppercase text-xs text-sand-soft font-bold mb-4">Palavra de quem vende</p>
+          <blockquote class="font-serif text-xl sm:text-2xl leading-relaxed text-white/95">
+            “Sou construtor na cidade — inclusive a casa do lote ao lado (D32) sou eu que estou erguendo. Moro aqui no condomínio e terei o maior prazer em te ajudar a tirar do papel a sua moradia ou o seu refúgio.”
+          </blockquote>
+          <div class="mt-6 rounded-2xl bg-forest-light/40 border border-white/10 p-5">
+            <p class="font-semibold text-sand mb-1.5">Suporte total para quem compra para construir</p>
+            <p class="text-white/80 text-sm leading-relaxed">
+              Indicação de mão de obra de confiança, fornecedores, orientação de obra e o que mais
+              você precisar para começar com o pé direito. Você não compra só o lote — ganha um
+              vizinho que entende de construção do seu lado.
+            </p>
+          </div>
+          <a href="#" class="wa mt-6 inline-flex items-center gap-2.5 rounded-full bg-[#25D366] px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-black/20 hover:brightness-105 active:scale-[.98] transition">
+            <svg viewBox="0 0 24 24" class="h-5 w-5 fill-current" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zM6.597 20.13c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.607z"/></svg>
+            Falar direto com o proprietário
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ CTA FINAL ============================ -->
+  <section class="relative py-24 sm:py-32 overflow-hidden">
+    <img src="img/portaria-frontal.jpg" alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+    <div class="absolute inset-0 bg-forest-deep/85"></div>
+    <div class="relative z-10 mx-auto max-w-2xl px-6 text-center text-white">
+      <p class="eyebrow uppercase text-xs text-sand-soft font-bold mb-4">Fale com a corretora</p>
+      <h2 class="font-serif text-3xl sm:text-5xl leading-tight mb-5">Vamos conversar sobre o seu novo lote?</h2>
+      <p class="text-white/80 mb-9 max-w-lg mx-auto">
+        Mande uma mensagem agora: tire suas dúvidas, peça a localização exata e
+        agende uma visita sem compromisso. Você fala direto com quem vende — e a
+        negociação é facilitada, com entrada e parcelamento.
+      </p>
+      <a href="#" class="wa inline-flex items-center gap-2.5 rounded-full bg-[#25D366] px-9 py-5 text-lg font-semibold text-white shadow-2xl shadow-black/30 hover:brightness-105 active:scale-[.98] transition">
+        <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zM6.597 20.13c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.607z"/></svg>
+        Quero garantir este lote
+      </a>
+      <p class="mt-6 text-sm text-white/70">
+        <span class="js-atendimento">Atendimento por corretora credenciada</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================ RODAPÉ ============================ -->
+  <footer class="bg-forest-deep text-white/70">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+      <div class="flex items-center gap-2.5">
+        <span class="inline-flex h-7 w-7 items-center justify-center rounded-md bg-sand/90">
+          <svg viewBox="0 0 32 32" class="h-4 w-4" aria-hidden="true"><path d="M16 5c4.5 5.6 7 9 7 12.7a7 7 0 0 1-14 0C9 14 11.5 10.6 16 5z" fill="#0e3b34"/></svg>
+        </span>
+        <span class="font-serif text-base text-white">Estância das Águas — Qd D, Lote 33</span>
+      </div>
+      <div class="text-center sm:text-right">
+        <p class="js-rodape">Keyla</p>
+        <p class="text-white/40 mt-1">© <span id="year">2026</span> — Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====================== BOTÃO FLUTUANTE WHATSAPP ====================== -->
+  <a href="#" class="wa fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-[#25D366] pl-4 pr-5 py-3.5 font-semibold text-white shadow-2xl shadow-black/30 hover:brightness-105 active:scale-95 transition"
+     aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zM6.597 20.13c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.607zM17.5 14.67c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+    <span class="hidden sm:inline">WhatsApp</span>
+  </a>
+
+  <!-- ============================ LIGHTBOX ============================ -->
+  <div id="lightbox" class="fixed inset-0 z-[60] bg-black/90 backdrop-blur-sm items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Visualização de imagem">
+    <button id="lb-close" class="absolute top-4 right-4 h-11 w-11 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition" aria-label="Fechar">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <button id="lb-prev" class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 h-11 w-11 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition" aria-label="Anterior">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <button id="lb-next" class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 h-11 w-11 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition" aria-label="Próxima">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </button>
+    <figure class="max-w-5xl w-full text-center">
+      <img id="lb-img" src="" alt="" class="max-h-[80vh] w-auto mx-auto rounded-lg" />
+      <figcaption id="lb-cap" class="text-white/80 text-sm mt-4"></figcaption>
+    </figure>
+  </div>
+
+  <!-- ============================ SCRIPT ============================ -->
+  <script>
+    /* =================================================================
+       CONFIG — PREENCHA UMA VEZ. Tudo o resto se conecta sozinho.
+       ================================================================= */
+    const CONFIG = {
+      whatsapp:  "5562983362400",            // DDI 55 + DDD 62 + 98336-2400
+      message:   "Olá, Keyla! Tenho interesse no Lote 33 (Qd D) do condomínio Estância das Águas, em Hidrolândia-GO. Pode me passar mais informações?",
+      corretora: "Keyla",                     // nome da corretora responsável
+      creci:     "",                          // [PREENCHER] nº/UF do CRECI (ex: 12345-F / GO). Deixe "" se ainda não tiver.
+    };
+
+    /* ---- Monta os links de WhatsApp em todos os elementos .wa ---- */
+    (function wireWhatsApp() {
+      const href = "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(CONFIG.message);
+      document.querySelectorAll("a.wa").forEach(a => {
+        a.href = href;
+        a.target = "_blank";
+        a.rel = "noopener";
+      });
+      // Corretora / CRECI — montados de forma que nada quebre se faltar o CRECI
+      const corretora = (CONFIG.corretora && !/PREENCHER/i.test(CONFIG.corretora)) ? CONFIG.corretora.trim() : "";
+      const hasCreci  = CONFIG.creci && !/PREENCHER/i.test(CONFIG.creci) && CONFIG.creci.trim() !== "";
+      const creciTxt  = hasCreci ? "CRECI " + CONFIG.creci.trim() : "";
+      document.querySelectorAll(".js-atendimento").forEach(el => {
+        el.textContent = "Atendimento por corretora credenciada"
+          + (corretora ? " — " + corretora : "")
+          + (hasCreci ? " (" + creciTxt + ")" : "");
+      });
+      document.querySelectorAll(".js-rodape").forEach(el => {
+        el.textContent = [corretora, creciTxt].filter(Boolean).join(" · ");
+      });
+    })();
+
+    /* ---- Ano automático no rodapé ---- */
+    (function () {
+      var y = document.getElementById("year");
+      // Date é evitado por consistência; ajuste manualmente se desejar outro ano.
+      if (y && !y.textContent.trim()) y.textContent = "2026";
+    })();
+
+    /* ---- Nav: fundo sólido ao rolar ---- */
+    (function () {
+      const nav = document.getElementById("nav");
+      const title = document.getElementById("nav-title");
+      const sub = document.getElementById("nav-sub");
+      const links = document.querySelectorAll(".nav-link");
+      function onScroll() {
+        const solid = window.scrollY > 40;
+        nav.classList.toggle("bg-cream/95", solid);
+        nav.classList.toggle("backdrop-blur", solid);
+        nav.classList.toggle("shadow-sm", solid);
+        title.classList.toggle("text-forest", solid);
+        title.classList.toggle("text-white", !solid);
+        sub.classList.toggle("text-forest/50", solid);
+        sub.classList.toggle("text-white/70", !solid);
+        links.forEach(l => {
+          l.classList.toggle("text-forest/70", solid);
+          l.classList.toggle("hover:text-forest", solid);
+          l.classList.toggle("text-white/85", !solid);
+          l.classList.toggle("hover:text-white", !solid);
+        });
+      }
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    })();
+
+    /* ---- Reveal on scroll ---- */
+    (function () {
+      const els = document.querySelectorAll(".reveal");
+      if (!("IntersectionObserver" in window)) { els.forEach(e => e.classList.add("in")); return; }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      els.forEach(e => io.observe(e));
+    })();
+
+    /* ---- Lightbox ---- */
+    (function () {
+      const items = Array.from(document.querySelectorAll(".gitem"));
+      const lb = document.getElementById("lightbox");
+      const img = document.getElementById("lb-img");
+      const cap = document.getElementById("lb-cap");
+      let i = 0;
+
+      function show(idx) {
+        i = (idx + items.length) % items.length;
+        const el = items[i];
+        img.src = el.dataset.full;
+        img.alt = el.dataset.cap || "";
+        cap.textContent = el.dataset.cap || "";
+      }
+      function open(idx) {
+        show(idx);
+        lb.classList.add("open", "flex");
+        document.body.style.overflow = "hidden";
+      }
+      function close() {
+        lb.classList.remove("open", "flex");
+        document.body.style.overflow = "";
+        img.src = "";
+      }
+      items.forEach((el, idx) => el.addEventListener("click", () => open(idx)));
+      document.getElementById("lb-close").addEventListener("click", close);
+      document.getElementById("lb-next").addEventListener("click", () => show(i + 1));
+      document.getElementById("lb-prev").addEventListener("click", () => show(i - 1));
+      lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
+      document.addEventListener("keydown", (e) => {
+        if (!lb.classList.contains("open")) return;
+        if (e.key === "Escape") close();
+        if (e.key === "ArrowRight") show(i + 1);
+        if (e.key === "ArrowLeft") show(i - 1);
+      });
+    })();
+  </script>
+</body>
+</html>

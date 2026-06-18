@@ -1,0 +1,7 @@
+# Fotos e vídeos originais (não usados pelo site — mantidos só localmente)
+img/WhatsApp Image*
+img/WhatsApp Video*
+
+# Sistema
+.DS_Store
+Thumbs.db
